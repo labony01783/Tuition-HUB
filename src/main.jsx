@@ -14,7 +14,7 @@ import Contact_us from './Components/Pages/Contact_us.jsx';
 import About_us from './Components/Pages/About_us.jsx';
 
 import Teacher_login from './Components/Pages/Authentication/Teacher_login.jsx';
-import Student_login from './Components/Pages/Authentication/Student_login.jsx';
+//import Student_login from './Components/Pages/Authentication/Student_login.jsx';
 import SignUpTeacher from './Components/Pages/Authentication/SignUpTeacher.jsx';
 import AuthProvider from './Components/Pages/Authentication/Providers/AuthProvider.jsx';
 import Postpage from './Components/Teacher/Postpage.jsx';
@@ -52,11 +52,7 @@ const router = createBrowserRouter([
     element:<Teacher_login></Teacher_login>, 
        
       },
-      {
-        path: "/student_login",
-    element:<Student_login></Student_login>, 
-       
-      },
+     
       {
         path: "/signUpTeacher",
     element:<SignUpTeacher></SignUpTeacher>, 
@@ -69,7 +65,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile",
-    element:<PrivateRoute ><Profile></Profile></PrivateRoute>, 
+    element:<PrivateRoute requiredRole="teacher" ><Profile></Profile></PrivateRoute>, 
        
       },
       

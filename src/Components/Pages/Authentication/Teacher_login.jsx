@@ -2,40 +2,50 @@ import { useContext } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "./Providers/AuthProvider";
 import Swal from 'sweetalert2'
-
+import { doc, getDoc } from 'firebase/firestore'; // Import Firestore functions
+import { useEffect } from "react";
 const Teacher_login = () => {
-  const {createUser,user}=useContext(AuthContext);
+  const {createUser,user,userRole}=useContext(AuthContext);
 
   const { signIn } = useContext(AuthContext); 
    // Access signIn from AuthContext
    const navigate = useNavigate();
+   useEffect(() => {
+    if (userRole) {
+        if (userRole === 'teacher') {
+            navigate('/profile');
+        } else if (userRole === 'student') {
+            navigate('/Postpage');
+        }
+    }
+}, [userRole]); // Dependency array ensures it runs when userRole changes
 
 
-  const handleLogin = e => {
+
+  const handleLogin = async(e )=> {
     e.preventDefault();
     const form = e.target;
 
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
+    try {
+      const result = await signIn(email, password);
+      const user = result.user;
+      console.log(user);
 
-    signIn(email, password)  // Call signIn from AuthContext
-      .then(result => {
-        const user = result.user;
-        console.log(user);
-        e.target.reset();
-        navigate('/profile');
-        
-  
-      }).catch(error => {
-        Swal.fire({
-         title: 'Not Valid',
-          text: 'You have to register first !',
-          icon: 'error',
-          confirmButtonText: 'Try Again'
-        })
+      // Reset the form after a successful login
+      e.target.reset();
+
       
-  });
+  } catch (error) {
+    Swal.fire({
+        title: 'Not Valid',
+        text: 'You have to register first!',
+        icon: 'error',
+        confirmButtonText: 'Try Again'
+    });
+}
 };
 
   return (
@@ -44,7 +54,7 @@ const Teacher_login = () => {
         <div className="text-center lg:text-left">
           <h1 className="text-5xl font-bold">Log in now!</h1>
           <p className="py-6 text-xl">
-            We value your skills. Log in to begin your journey as a tutor.
+            We value your skills. Log in to connect with us.
           </p>
           <div className="mt-2 text-center">
             <Link to='/'>

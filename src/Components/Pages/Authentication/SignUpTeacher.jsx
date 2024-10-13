@@ -3,11 +3,11 @@ import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "./Providers/AuthProvider";
 import Swal from 'sweetalert2'
-
+import { doc, getDoc } from 'firebase/firestore'; // Import Firestore functions
 
 const SignUpTeacher = () => {
 
-    const {createUser,user}=useContext(AuthContext);
+    const {createUser,user,userRole}=useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleSignUp = event => {
@@ -17,13 +17,21 @@ const SignUpTeacher = () => {
        const email=form.email.value;
        const password=form.password.value;
        console.log(name,email,password)
+       const userRole=form.userRole.value
 
-       createUser(email, password)
+       createUser(email, password,userRole)
    .then(result => {
       const user = result.user;
       console.log(user);
-      form.reset();  // Correcting the form reset
-      navigate('/profile');  // Ensure this route exists in your React Router setup
+      form.reset(); 
+       // Correcting the form reset
+       if (userRole === 'teacher') {
+        navigate('/profile');  // Navigate to Profile for teachers
+    } else if (userRole === 'student') {
+        navigate('/Postpage');  // Navigate to PostPage for students
+    }
+
+     // navigate('/profile');  // Ensure this route exists in your React Router setup
    })
    .catch(error => {
     Swal.fire({
@@ -42,7 +50,7 @@ const SignUpTeacher = () => {
         <div className="text-center lg:text-left">
           <h1 className="text-5xl font-bold">Sign Up now!</h1>
           <p className="py-6 text-xl">
-            We value your skills. Sign up to begin your journey as a tutor.
+            We value your skills. Sign Up to begin your journey with us.
           </p>
           <div className="mt-2 text-center">
             <Link to='/'>
@@ -83,6 +91,24 @@ const SignUpTeacher = () => {
                 required
               />
             </div>
+
+
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text" >Sign Up as</span>
+              </label>
+              <input
+               name="userRole"
+                type="name"
+                placeholder="'teacher' or 'student'"
+                className="input input-bordered"
+                required
+              />
+            </div>
+
+
+
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Confirm Password</span>

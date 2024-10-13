@@ -8,7 +8,7 @@ const Header = () => {
 
 
   const [theme, setTheme] = useState("default");
-  const {createUser,user,logout}=useContext(AuthContext);
+  const {createUser,user,logout, userRole}=useContext(AuthContext);
   
   const handleLogout=()=>{
 
@@ -53,8 +53,10 @@ const Header = () => {
       </li>
       {
         user &&<>
+        {userRole === "teacher" && (
+             <NavLink className="mt-2" to="/profile">Profile</NavLink>       
+                )}
         
-        <NavLink className="mt-2" to="/profile">Profile</NavLink>
         <NavLink className="mt-2  ml-2" to= "/Postpage">Dashboard</NavLink>
         
         </>

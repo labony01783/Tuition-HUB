@@ -9,10 +9,10 @@ const PrivateRoute = ({children}) => {
         return children;
     }
 
-
     return <Navigate to='/teacher_login'></Navigate>
         
     
 };
+
 
 export default PrivateRoute;
