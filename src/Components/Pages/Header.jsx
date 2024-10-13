@@ -1,11 +1,31 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { HiAcademicCap } from "react-icons/hi";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import AuthProvider, { AuthContext } from "./Authentication/Providers/AuthProvider";
 
 const Header = () => {
+  const navigate = useNavigate();
+
+
   const [theme, setTheme] = useState("default");
+  const {createUser,user,logout}=useContext(AuthContext);
+  
+  const handleLogout=()=>{
+
+ logout()
+ 
+ .then(result=>{
+  navigate('/');
+ })
+ .catch (error=>console.error(error))
+  }
+
 
   useEffect(() => {
+
+   
+   
+
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
@@ -31,11 +51,21 @@ const Header = () => {
       <li>
         <NavLink to="/contact">Contact us</NavLink>
       </li>
+      {
+        user &&<>
+        
+        <NavLink className="mt-2" to="/profile">Profile</NavLink>
+        <NavLink className="mt-2  ml-2" to= "/Postpage">Dashboard</NavLink>
+        
+        </>
+
+      }
     </>
   );
 
   return (
-    <div className="navbar bg-base-100">
+   <div>
+     <div className="navbar bg-base-100 ml-5">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -68,7 +98,8 @@ const Header = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links()}</ul>
       </div>
-      <div className="navbar-end">
+    
+     <div className="">
         <input
           type="checkbox"
           value="synthwave"
@@ -77,7 +108,21 @@ const Header = () => {
           aria-label="Synthwave Theme"
         />
       </div>
+      <div className="navbar-end">
+        {
+          user? <>
+        <a onClick={handleLogout} className="btn btn-sm" href="">Sign out</a>
+          </>
+          :
+          <NavLink to="/teacher_login" ><button>Log in</button></NavLink>
+        }
+       
+      
+
+      </div>
+    
     </div>
+   </div>
   );
 };
 
