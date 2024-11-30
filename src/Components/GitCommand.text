@@ -1,3 +1,8 @@
+<<<<<<< HEAD
 git remote add origin https://github.com/labony01783/Practice123.git
 git branch -M main
+=======
+git remote add origin https://github.com/labony01783/Practice123.git
+git branch -M main
+>>>>>>> d80cf9b5659a0179fa76a9dda2cfa2870e11ff13
 git push -u origin main

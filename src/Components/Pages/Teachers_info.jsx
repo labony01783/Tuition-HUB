@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useLoaderData } from "react-router-dom";
 import ProfileCard from "../Teacher/ProfileCard";
 
@@ -34,4 +35,16 @@ const Teachers_info = () => {
     );
 };
 
+=======
+
+
+const Teachers_info = () => {
+    return (
+        <div>
+         <h1>Teachers info</h1>   
+        </div>
+    );
+};
+
+>>>>>>> d80cf9b5659a0179fa76a9dda2cfa2870e11ff13
 export default Teachers_info;

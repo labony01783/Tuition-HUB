@@ -20,8 +20,11 @@ import AuthProvider from './Components/Pages/Authentication/Providers/AuthProvid
 import Postpage from './Components/Teacher/Postpage.jsx';
 import PrivateRoute from './Routes/PrivateRoute.jsx';
 import Profile from './Components/Teacher/Profile.jsx';
+<<<<<<< HEAD
 import AddProfile from './Components/Teacher/AddProfile.jsx';
 import UpdateProfile from './Components/Teacher/UpdateProfile.jsx';
+=======
+>>>>>>> d80cf9b5659a0179fa76a9dda2cfa2870e11ff13
 
 
 const router = createBrowserRouter([
@@ -36,8 +39,13 @@ const router = createBrowserRouter([
       },
       {
         path: "/teacher_info",
+<<<<<<< HEAD
         element: <PrivateRoute><Teachers_info></Teachers_info></PrivateRoute>,
         loader: ()=>fetch('http://localhost:3000/tuitionHub')
+=======
+        element: <PrivateRoute><Teachers_info></Teachers_info></PrivateRoute>
+        
+>>>>>>> d80cf9b5659a0179fa76a9dda2cfa2870e11ff13
       },
       {
         path: "/contact",
@@ -66,6 +74,7 @@ const router = createBrowserRouter([
        
       },
       {
+<<<<<<< HEAD
         path: "/profile/:id",
     element:/*<PrivateRoute requiredRole="teacher" >*/<Profile></Profile>/*</PrivateRoute>*/, 
     loader: ({ params }) => fetch(`http://localhost:3000/tuitionHub/${params.id}`)
@@ -80,6 +89,12 @@ const router = createBrowserRouter([
     element:<UpdateProfile></UpdateProfile>, 
     loader: ({params})=>fetch(`http://localhost:3000/tuitionHub/${params.id}`)
       },
+=======
+        path: "/profile",
+    element:<PrivateRoute requiredRole="teacher" ><Profile></Profile></PrivateRoute>, 
+       
+      },
+>>>>>>> d80cf9b5659a0179fa76a9dda2cfa2870e11ff13
       
       
      

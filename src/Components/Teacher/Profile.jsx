@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Link, useLoaderData } from "react-router-dom";
 import Swal from 'sweetalert2/src/sweetalert2.js'
 const Profile = () => {
@@ -40,3 +41,16 @@ const Profile = () => {
 };
 
 export default Profile;
+=======
+
+
+const Profile = () => {
+    return (
+        <div>
+          <h1>Your Profile !</h1>  
+        </div>
+    );
+};
+
+export default Profile;
+>>>>>>> d80cf9b5659a0179fa76a9dda2cfa2870e11ff13
